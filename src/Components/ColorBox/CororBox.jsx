@@ -1,12 +1,17 @@
 import React from 'react';
-import './ColorBox.css';
+import { ColorBox } from './Styled';
 
 const CororBox = ({ background, name }) => {
   return (
-    <div style={{ backgroundColor: background.color }} className='ColorBox'>
-      <span>{name} </span>
-      <span>More</span>
-    </div>
+    <ColorBox background={background}>
+      <div className='copy-container'>
+        <div className='box-content'>
+          <span>{name} </span>
+        </div>
+        <button className='copy-button'>Copy</button>
+      </div>
+      <span className='see-more'>More</span>
+    </ColorBox>
   );
 };
 

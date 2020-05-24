@@ -1,19 +1,19 @@
 import React from 'react';
 import ColorBox from '../ColorBox/CororBox';
-import './Palette.css';
+import { Palette } from './Styled';
 
-const Palette = (props) => {
+const MyPalette = (props) => {
   console.log(props);
 
   return (
-    <div className='Palette'>
+    <Palette>
       <div className='Palette-colors'>
         {props.colors.map((color, index) => (
-          <ColorBox key={index} name={color.name} background={color} />
+          <ColorBox key={index} name={color.name} background={color.color} />
         ))}
       </div>
-    </div>
+    </Palette>
   );
 };
 
-export default Palette;
+export default MyPalette;
