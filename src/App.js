@@ -1,12 +1,11 @@
 import React from 'react';
-import './App.css';
-import Hajoyan from './hajox';
+import Palette from './Palette';
+import seedColors from './seedColors';
 
 function App() {
   return (
-    <div className='App'>
-      VONCES APER
-      <Hajoyan />
+    <div>
+      <Palette {...seedColors[4]} />
     </div>
   );
 }
