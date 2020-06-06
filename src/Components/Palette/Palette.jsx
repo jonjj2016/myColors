@@ -1,9 +1,9 @@
 import React from 'react';
-import ColorBox from '../ColorBox/CororBox';
+import ColorBox from '../ColorBox/ColorBox';
 import { Palette } from './Styled';
 
 const MyPalette = (props) => {
-  console.log(props);
+  // console.log(props);
 
   return (
     <Palette>

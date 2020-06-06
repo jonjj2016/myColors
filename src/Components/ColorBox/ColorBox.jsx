@@ -4,14 +4,12 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 const CororBox = (props) => {
   const { background, name } = props;
-  console.log(props);
   const [copied, setCopied] = useState(false);
   const onClick = () => {
     setCopied(true);
   };
   useEffect(() => {
     setTimeout(() => {
-      console.log(copied);
       setCopied(false);
     }, 2000);
   }, [onClick]);
