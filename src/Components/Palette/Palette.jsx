@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ColorBox from '../ColorBox/ColorBox';
-import { Palette } from './Styled';
-import Slider, { Range } from 'rc-slider';
+import { Palette, SliderWrapper } from './Styled';
+import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 
 const MyPalette = ({ palette }) => {
@@ -12,7 +12,9 @@ const MyPalette = ({ palette }) => {
   };
   return (
     <Palette>
-      <Slider defaultValue={state.level} min={100} step={100} max={900} onAfterChange={changeLevel} />
+      <SliderWrapper>
+        <Slider defaultValue={state.level} min={100} step={100} max={900} onAfterChange={changeLevel} />
+      </SliderWrapper>
       <div className='Palette-colors'>
         {colors[state.level].map((color, index) => (
           <ColorBox key={index} name={color.name} background={color.hex} />
