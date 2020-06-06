@@ -8,7 +8,7 @@ function App() {
 
   return (
     <div>
-      <Palette {...seedColors[8]} />{' '}
+      <Palette palette={paletteGenerator(seedColors[4])} {...seedColors[8]} />{' '}
     </div>
   );
 }
