@@ -59,3 +59,58 @@ export const ColorBox = styled.div`
     text-transform: uppercase;
   }
 `;
+export const Copy_Overlay = styled.div`
+  background: ${({ background }) => background};
+  opacity: 0;
+  z-index: 0;
+  height: 100%;
+  transition: transform 1.6s ease;
+  width: 100%;
+  transform: scale(0.1);
+  ${(props) =>
+    props.copied &&
+    ` z-index: 10;
+    opacity: 1;
+    transform: scale(50);
+    position: absolute;
+`}
+`;
+export const Message = styled.div`
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: -1;
+  font-size: 4rem;
+  transform: scale(0);
+  opacity: 0;
+  flex-direction: column;
+  transition: transform 0.4s ease-in-out;
+  transition-delay: 0.3s;
+  color: #eee;
+  h1 {
+    font-weight: 400;
+    text-shadow: 1px 2px 7px rgba(0, 0, 0, 0.6);
+    background: rgba(255, 255, 255, 0.1);
+    width: 100%;
+    text-align: center;
+    padding: 1rem;
+    margin-bottom: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.3rem;
+  }
+  p {
+    font-size: 2rem;
+    font-weight: 100;
+  }
+  ${(props) =>
+    props.copied &&
+    ` z-index: 11;
+    opacity: 1;
+    transform: scale(1);
+`}
+`;
