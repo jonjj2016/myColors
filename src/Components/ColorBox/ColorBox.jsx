@@ -1,23 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { ColorBox, Copy_Overlay, Message } from './Styled';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-
 let timeout;
-
 const CororBox = (props) => {
   const { background, name } = props;
   const [copied, setCopied] = useState(false);
   const onClick = (e) => {
     // e.stopImmediatePropagation();
     setCopied(true);
-    clearTimeout(timeout);
   };
   useEffect(() => {
-    timeout = setTimeout(() => {
-      setCopied(false);
-    }, 1500);
-    return () => clearTimeout(timeout);
-  }, [onClick]);
+    if (copied === true) {
+      timeout = setTimeout(() => {
+        setCopied(false);
+      }, 1500);
+    }
+    return () => clearTimeout();
+  }, [onClick, copied]);
 
   return (
     <CopyToClipboard onCopy={onClick} text={background}>

@@ -1,11 +1,12 @@
 import React from 'react';
-import { NavBarWrapper, SliderWrapper, SelectWrapper } from './Styled';
+import { NavBarWrapper, SliderWrapper, SelectWrapper, Span } from './Styled';
 import 'rc-slider/assets/index.css';
 import Slider from 'rc-slider';
 import Select from '@material-ui/core/Select';
-import { MenuItem } from '@material-ui/core';
+import { MenuItem, Snackbar, IconButton } from '@material-ui/core';
+import CloseIcon from '@material-ui/icons/Close';
 
-const NavBar = ({ level, changeLevel, handleSelectChange, format }) => {
+const NavBar = ({ closeSnackbar, open, level, changeLevel, handleSelectChange, format }) => {
   return (
     <NavBarWrapper>
       <div className='logo'>
@@ -22,6 +23,18 @@ const NavBar = ({ level, changeLevel, handleSelectChange, format }) => {
           <MenuItem value='rgba'>RGBA - rgba(255,255,255,1.0)</MenuItem>
         </Select>
       </SelectWrapper>
+      <Snackbar
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+        autoHideDuration={3000}
+        onClose={closeSnackbar}
+        action={[
+          <IconButton onClick={closeSnackbar} color='inherit' key='close' aria-label='close'>
+            <CloseIcon />
+          </IconButton>,
+        ]}
+        message={<Span>Format Changed to {format.toUpperCase()}</Span>}
+        open={open}
+      />
     </NavBarWrapper>
   );
 };

@@ -4,6 +4,7 @@ export const NavBarWrapper = styled.header`
   align-items: center;
   justify-content: flex-start;
   height: 6vh;
+  width: 100vw;
   .logo {
     margin-right: 15px;
     padding: 0 13px;
@@ -44,4 +45,8 @@ export const SliderWrapper = styled.div`
     height: 8px;
   }
 `;
-export const SelectWrapper = styled.div``;
+export const SelectWrapper = styled.div`
+  margin-left: auto;
+  margin-right: 1rem;
+`;
+export const Span = styled.span``;
