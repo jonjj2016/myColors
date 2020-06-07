@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavBarWrapper, SliderWrapper, SelectWrapper, Span } from './Styled';
+import { NavBarWrapper, SliderWrapper, SelectWrapper, Logo, Span } from './Styled';
 import 'rc-slider/assets/index.css';
 import Slider from 'rc-slider';
 import Select from '@material-ui/core/Select';
@@ -9,9 +9,7 @@ import CloseIcon from '@material-ui/icons/Close';
 const NavBar = ({ closeSnackbar, open, level, changeLevel, handleSelectChange, format }) => {
   return (
     <NavBarWrapper>
-      <div className='logo'>
-        <a href='#'>mycolorpicker</a>
-      </div>
+      <Logo to='/'>mycolorpicker</Logo>
       <span>Level : {level}</span>
       <SliderWrapper>
         <Slider defaultValue={level} min={100} step={100} max={900} onAfterChange={changeLevel} />

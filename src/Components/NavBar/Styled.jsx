@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 export const NavBarWrapper = styled.header`
   display: flex;
   align-items: center;
@@ -6,19 +7,6 @@ export const NavBarWrapper = styled.header`
   height: 6vh;
   width: 100vw;
   .logo {
-    margin-right: 15px;
-    padding: 0 13px;
-    font-size: 1.4rem;
-    background-color: #eceff1;
-    font-family: 'Roboto', Helvetica, sans-serif;
-
-    height: 100%;
-    display: flex;
-    align-items: center;
-    a {
-      text-decoration: none;
-      color: #222;
-    }
   }
 `;
 export const SliderWrapper = styled.div`
@@ -50,3 +38,17 @@ export const SelectWrapper = styled.div`
   margin-right: 1rem;
 `;
 export const Span = styled.span``;
+export const Logo = styled(Link)`
+  margin-right: 15px;
+  padding: 0 13px;
+  font-size: 1.4rem;
+  background-color: #eceff1;
+  font-family: 'Roboto', Helvetica, sans-serif;
+
+  height: 100%;
+  display: flex;
+  align-items: center;
+
+  text-decoration: none;
+  color: #222;
+`;
