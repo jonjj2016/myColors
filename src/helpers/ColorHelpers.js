@@ -1,4 +1,7 @@
 import chroma from 'chroma-js';
+import seedColors from '../seedColors'
+
+
 let levels = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900];
 
 const getRange = (hexColor) => {
@@ -39,4 +42,10 @@ export const paletteGenerator = (starterPallet) => {
         })
     })
     return newPalette
+}
+
+export const findPalette = (id) => {
+    return seedColors.find(palette => {
+        return palette.id === id
+    })
 }
