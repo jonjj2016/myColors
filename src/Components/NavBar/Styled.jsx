@@ -44,3 +44,4 @@ export const SliderWrapper = styled.div`
     height: 8px;
   }
 `;
+export const SelectWrapper = styled.div``;

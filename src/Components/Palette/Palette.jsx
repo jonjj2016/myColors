@@ -5,16 +5,22 @@ import NavBar from '../NavBar/NavBar';
 
 const MyPalette = ({ palette }) => {
   const { colors } = palette;
-  const [state, setState] = useState({ level: 500 });
+  const [state, setState] = useState({ level: 500, format: 'hex' });
+
   const changeLevel = (level) => {
     setState({ ...state, level });
   };
+
+  const onHandleSelectChange = (e) => {
+    setState({ ...state, format: e.target.value });
+  };
+
   return (
     <Palette>
-      <NavBar level={state.level} changeLevel={changeLevel} />
+      <NavBar format={state.format} handleSelectChange={onHandleSelectChange} level={state.level} changeLevel={changeLevel} />
       <div className='Palette-colors'>
         {colors[state.level].map((color, index) => (
-          <ColorBox key={index} name={color.name} background={color.hex} />
+          <ColorBox key={index} name={color.name} background={color[state.format]} />
         ))}
       </div>
     </Palette>

@@ -28,11 +28,11 @@ export const ColorBox = styled.div`
     border: none;
     opacity: 0;
     cursor: pointer;
+    transition: 0.3s;
   }
 
   &:hover .copy-button {
     opacity: 1;
-    transition: 0.5s;
   }
   .box-content {
     position: absolute;
@@ -89,8 +89,8 @@ export const Message = styled.div`
   transform: scale(0);
   opacity: 0;
   flex-direction: column;
-  transition: transform 0.4s ease-in-out;
-  transition-delay: 0.3s;
+  transition: transform 0.5s ease-in-out;
+  transition-delay: 0.4s;
   color: #eee;
   h1 {
     font-weight: 400;
