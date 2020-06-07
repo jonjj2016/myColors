@@ -5,7 +5,7 @@ const Footer = ({ name, emoji }) => {
   return (
     <FooterWrapper>
       {name}
-      {/* <span className='emoji'>{emoji}</span> */}
+      <span className='emoji'>{emoji}</span>
     </FooterWrapper>
   );
 };

@@ -8,5 +8,15 @@ export const FooterWrapper = styled.footer`
   align-items: center;
 
   font-weight: 600;
-  padding: 0 1rem;
+  .emoji {
+    background-color: #999;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #eee;
+    width: 5rem;
+    margin-top: 0;
+    margin-left: 2rem;
+  }
 `;
