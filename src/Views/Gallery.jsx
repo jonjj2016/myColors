@@ -6,10 +6,16 @@ import { GalleryWrapper } from './Styles/Styled_Gallery';
 const MainRoute = ({ palettes }) => {
   return (
     <GalleryWrapper>
-      <h1>React Collors</h1>
-      {palettes.map((palette, index) => {
-        return <MiniPalette key={index} {...palette} />;
-      })}
+      <div className='container'>
+        <nav className='nav'>
+          <h1>React Collors</h1>
+        </nav>
+        <div className='palettes'>
+          {palettes.map((palette, index) => {
+            return <MiniPalette key={index} {...palette} />;
+          })}
+        </div>
+      </div>
     </GalleryWrapper>
   );
 };
