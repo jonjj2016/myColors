@@ -1,12 +1,15 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
-export const MiniPaletteWrapper = styled.div`
+export const MiniPaletteWrapper = styled(Link)`
   background-color: #eee;
   border: 1px solid #000;
   border-radius: 5px;
   padding: 0.5rem;
   overflow: hidden;
   position: relative;
+  color: #000;
+  text-decoration: none;
   &:hover {
     cursor: pointer;
   }
