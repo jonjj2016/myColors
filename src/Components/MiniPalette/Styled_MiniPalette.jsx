@@ -11,7 +11,11 @@ export const MiniPaletteWrapper = styled.div`
     cursor: pointer;
   }
   .colors {
-    background-color: grey;
+    background-color: #444;
+    height: 150px;
+    width: 100%;
+    border-radius: 5px;
+    overflow: hidden;
   }
   .title {
     display: flex;
@@ -26,4 +30,13 @@ export const MiniPaletteWrapper = styled.div`
       font-size: 1.5rem;
     }
   }
+`;
+export const MiniColorBox = styled.div`
+  background-color: ${(props) => props.color};
+  height: 25%;
+  width: 20%;
+  margin: 0 auto;
+  display: inline-block;
+  margin-bottom: -4px;
+  position: relative;
 `;
