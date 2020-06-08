@@ -11,8 +11,9 @@ function App() {
   return (
     <Switch>
       <Suspense fallback={<h1>Loading...</h1>}>
-        <Route path='/palette/:id' exact render={() => <Palette />} />
         <Route path='/' exact render={() => <Gallery palettes={seedColors} />} />
+        <Route path='/palette/:id' exact render={() => <Palette />} />
+        <Route path='/palette/:paletteId/:colorId' exact render={() => <h1>Color variants</h1>} />
       </Suspense>
     </Switch>
   );

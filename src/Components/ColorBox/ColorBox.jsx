@@ -1,14 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { ColorBox, Copy_Overlay, Message } from './Styled';
+import { useParams } from 'react-router-dom';
+import { ColorBox, Copy_Overlay, Message, More } from './Styled';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+
 let timeout;
+
 const CororBox = (props) => {
-  const { background, name } = props;
+  const { background, name, id } = props;
+  const { id: paramId } = useParams();
   const [copied, setCopied] = useState(false);
+
   const onClick = (e) => {
-    // e.stopImmediatePropagation();
     setCopied(true);
   };
+
   useEffect(() => {
     if (copied === true) {
       timeout = setTimeout(() => {
@@ -35,7 +40,9 @@ const CororBox = (props) => {
             Copy
           </button>
         </div>
-        <span className='see-more'>More</span>
+        <More to={`/palette/${paramId}/${id}`} onClick={(e) => e.stopPropagation()}>
+          More
+        </More>
       </ColorBox>
     </CopyToClipboard>
   );

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const ColorBox = styled.div`
   width: 20%;
@@ -45,19 +46,6 @@ export const ColorBox = styled.div`
     text-transform: uppercase;
     font-size: 12px;
   }
-  .see-more {
-    background: rgba(255, 255, 255, 0.3);
-    position: absolute;
-    border: none;
-    right: 0;
-    color: #eee;
-    bottom: 0;
-    width: 60px;
-    height: 30px;
-    text-align: center;
-    line-height: 30px;
-    text-transform: uppercase;
-  }
 `;
 export const Copy_Overlay = styled.div`
   background: ${({ background }) => background};
@@ -74,6 +62,20 @@ export const Copy_Overlay = styled.div`
     transform: scale(50);
     position: absolute;
 `}
+`;
+export const More = styled(Link)`
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.3);
+  position: absolute;
+  border: none;
+  right: 0;
+  color: #eee;
+  bottom: 0;
+  width: 60px;
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
+  text-transform: uppercase;
 `;
 export const Message = styled.div`
   position: fixed;
