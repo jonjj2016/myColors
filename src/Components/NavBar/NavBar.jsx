@@ -6,14 +6,18 @@ import Select from '@material-ui/core/Select';
 import { MenuItem, Snackbar, IconButton } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 
-const NavBar = ({ closeSnackbar, open, level, changeLevel, handleSelectChange, format }) => {
+const NavBar = ({ closeSnackbar, open, level, changeLevel, handleSelectChange, format, showSlider = true }) => {
   return (
     <NavBarWrapper>
       <Logo to='/'>mycolorpicker</Logo>
-      <span>Level : {level}</span>
-      <SliderWrapper>
-        <Slider defaultValue={level} min={100} step={100} max={900} onAfterChange={changeLevel} />
-      </SliderWrapper>
+      {showSlider && (
+        <React.Fragment>
+          <span>Level : {level}</span>
+          <SliderWrapper>
+            <Slider defaultValue={level} min={100} step={100} max={900} onAfterChange={changeLevel} />
+          </SliderWrapper>
+        </React.Fragment>
+      )}
       <SelectWrapper>
         <Select value={format} onChange={handleSelectChange}>
           <MenuItem value='hex'>HEX - #ffffff</MenuItem>
@@ -21,6 +25,7 @@ const NavBar = ({ closeSnackbar, open, level, changeLevel, handleSelectChange, f
           <MenuItem value='rgba'>RGBA - rgba(255,255,255,1.0)</MenuItem>
         </Select>
       </SelectWrapper>
+
       <Snackbar
         anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
         autoHideDuration={3000}

@@ -6,7 +6,7 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 let timeout;
 
 const CororBox = (props) => {
-  const { background, name, id } = props;
+  const { background, name, id, fromShades = false } = props;
   const { id: paramId } = useParams();
   const [copied, setCopied] = useState(false);
 
@@ -18,14 +18,14 @@ const CororBox = (props) => {
     if (copied === true) {
       timeout = setTimeout(() => {
         setCopied(false);
-      }, 1500);
+      }, 2000);
     }
     return () => clearTimeout();
   }, [onClick, copied]);
 
   return (
     <CopyToClipboard onCopy={onClick} text={background}>
-      <ColorBox background={background}>
+      <ColorBox fromShades={fromShades} background={background}>
         <Copy_Overlay background={background} copied={copied} />
         <Message copied={copied}>
           <h1>Copied!</h1>
@@ -40,9 +40,11 @@ const CororBox = (props) => {
             Copy
           </button>
         </div>
-        <More to={`/palette/${paramId}/${id}`} onClick={(e) => e.stopPropagation()}>
-          More
-        </More>
+        {!fromShades && (
+          <More to={`/palette/${paramId}/${id}`} onClick={(e) => e.stopPropagation()}>
+            More
+          </More>
+        )}
       </ColorBox>
     </CopyToClipboard>
   );

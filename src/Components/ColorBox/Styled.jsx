@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export const ColorBox = styled.div`
   width: 20%;
-  height: 25%;
+  height: ${(props) => (props.fromShades ? '50' : '25')}%;
   margin: 0 auto;
   position: relative;
   display: inline-block;

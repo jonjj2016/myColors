@@ -24,7 +24,7 @@ const MyPalette = ({ palette }) => {
       <NavBar closeSnackbar={onCloseSnackbar} open={state.snackBar} format={state.format} handleSelectChange={onHandleSelectChange} level={state.level} changeLevel={changeLevel} />
       <div className='Palette-colors'>
         {colors[state.level].map((color, index) => (
-          <ColorBox key={index} name={color.name} id={color.id} onClose={() => console.log('hi')} background={color[state.format]} />
+          <ColorBox key={index} name={color.name} id={color.id} background={color[state.format]} />
         ))}
       </div>
       <Footer name={palette.paletteName} emoji={palette.emoji} />

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import MiniPalette from '../Components/MiniPalette/MiniPalette';
 import { GalleryWrapper } from './Styles/Styled_Gallery';
 
