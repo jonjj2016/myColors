@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { gatherShades } from '../../helpers/ColorHelpers';
-import ColorBox from '../ColorBox/ColorBox';
+import ColourBox from '../ColorBox/ColorBox';
 import { Palette } from '../Palette/Styled';
 import NavBar from '../NavBar/NavBar_Container';
 import Footer from '../Footer/Footer';
+import { ColorBox } from '../ColorBox/Styled';
+import { GoBack } from './Styled_SinglePaletteShades';
+import { useHistory } from 'react-router-dom';
 
 const SinglePalette = ({ palette, color }) => {
+  const history = useHistory();
+  console.log(history);
+
   const [state, setState] = useState({
     shades: [],
     format: 'hex',
@@ -25,15 +31,24 @@ const SinglePalette = ({ palette, color }) => {
   const onCloseSnackbar = () => {
     setState({ ...state, snackBar: false });
   };
-
+  const onRouteChange = () => {
+    history.goBack();
+  };
   return (
     <Palette>
       <NavBar showSlider={false} closeSnackbar={onCloseSnackbar} open={state.snackBar} format={state.format} handleSelectChange={onHandleSelectChange} />
       <div className='Palette-colors'>
         {state.shades.map((shade, index) => {
           const { name, id, hex: background } = shade;
-          return <ColorBox key={index} fromShades background={shade[state.format]} name={shade.name} id={shade.id} />;
+          return <ColourBox key={index} fromShades background={shade[state.format]} name={shade.name} id={shade.id} />;
         })}
+        <ColorBox show={true} fromShades={true}>
+          <GoBack>
+            <button onClick={onRouteChange} className='copy-button'>
+              Go Back
+            </button>
+          </GoBack>
+        </ColorBox>
       </div>
       <Footer name={palette.paletteName} emoji={palette.emoji} />
     </Palette>

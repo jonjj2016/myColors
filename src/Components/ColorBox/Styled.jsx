@@ -29,6 +29,9 @@ export const ColorBox = styled.div`
     border: none;
     opacity: 0;
     cursor: pointer;
+    text-decoration: ${(props) => props.fromShades && 'none'};
+    opacity: ${(props) => (props.show ? 1 : 0)};
+
     transition: 0.3s;
   }
 
