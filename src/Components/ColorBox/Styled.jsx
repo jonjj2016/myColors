@@ -25,6 +25,7 @@ export const ColorBox = styled.div`
     font-size: 1rem;
     line-height: 1;
     color: #eee;
+    color: ${(props) => (props.isDark ? '#fff' : '#333')};
     text-transform: uppercase;
     border: none;
     opacity: 0;
@@ -44,7 +45,8 @@ export const ColorBox = styled.div`
     left: 0;
     bottom: 0;
     padding: 10px;
-    color: #111;
+    color: ${(props) => (props.isDark ? '#fff' : '#111')};
+
     letter-spacing: 1px;
     text-transform: uppercase;
     font-size: 12px;
@@ -57,6 +59,7 @@ export const Copy_Overlay = styled.div`
   height: 100%;
   transition: transform 1.6s ease;
   width: 100%;
+
   transform: scale(0.1);
   ${(props) =>
     props.copied &&
@@ -73,6 +76,7 @@ export const More = styled(Link)`
   border: none;
   right: 0;
   color: #eee;
+  color: ${(props) => (props.isDark ? '#fff' : '#666')};
   bottom: 0;
   width: 60px;
   height: 30px;
@@ -97,6 +101,8 @@ export const Message = styled.div`
   transition: transform 0.5s ease-in-out;
   transition-delay: 0.4s;
   color: #eee;
+  /* ; */
+
   h1 {
     font-weight: 400;
     text-shadow: 1px 2px 7px rgba(0, 0, 0, 0.6);
@@ -107,10 +113,13 @@ export const Message = styled.div`
     margin-bottom: 0;
     text-transform: uppercase;
     letter-spacing: 0.3rem;
+    color: ${(props) => (props.isDark ? '#eee' : '#444')};
   }
   p {
     font-size: 2rem;
     font-weight: 100;
+    letter-spacing: 2px;
+    color: ${(props) => (props.isDark ? '#eee' : '#333')};
   }
   ${(props) =>
     props.copied &&
