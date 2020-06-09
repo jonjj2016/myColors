@@ -8,10 +8,13 @@ let timeout;
 
 const CororBox = (props) => {
   const { background, name, id, fromShades = false } = props;
+
   const { id: paramId } = useParams();
+
   const [copied, setCopied] = useState(false);
+
   const isDarkcolor = chroma(background).luminance() <= 0.18;
-  const isLightColor = chroma(background).luminance() >= 0.8;
+
   const onClick = (e) => {
     setCopied(true);
   };
@@ -27,7 +30,7 @@ const CororBox = (props) => {
 
   return (
     <CopyToClipboard onCopy={onClick} text={background}>
-      <ColorBox isLight={isLightColor} isDark={isDarkcolor} fromShades={fromShades} background={background}>
+      <ColorBox isDark={isDarkcolor} fromShades={fromShades} background={background}>
         <Copy_Overlay background={background} copied={copied} />
         <Message isDark={isDarkcolor} copied={copied}>
           <h1>Copied!</h1>
@@ -43,7 +46,7 @@ const CororBox = (props) => {
           </button>
         </div>
         {!fromShades && (
-          <More isLight={isLightColor} isDark={isDarkcolor} to={`/palette/${paramId}/${id}`} onClick={(e) => e.stopPropagation()}>
+          <More isDark={isDarkcolor} to={`/palette/${paramId}/${id}`} onClick={(e) => e.stopPropagation()}>
             More
           </More>
         )}

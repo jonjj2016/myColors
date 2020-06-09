@@ -24,8 +24,9 @@ export const ColorBox = styled.div`
     background: rgba(255, 255, 255, 0.3);
     font-size: 1rem;
     line-height: 1;
-    color: #eee;
     color: ${(props) => (props.isDark ? '#fff' : '#333')};
+
+    color: ${(props) => props.back && '#eee'};
     text-transform: uppercase;
     border: none;
     opacity: 0;

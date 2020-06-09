@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavBarWrapper, SliderWrapper, SelectWrapper, Logo, Span } from './Styled';
+import { NavBarWrapper, SliderWrapper, SelectWrapper, Logo, Span, MyLink } from './Styled';
 import 'rc-slider/assets/index.css';
 import Slider from 'rc-slider';
 import Select from '@material-ui/core/Select';

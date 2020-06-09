@@ -1,6 +1,15 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const GalleryWrapper = styled.div`
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+  }
   .container {
     width: 50%;
     display: flex;
@@ -12,6 +21,7 @@ export const GalleryWrapper = styled.div`
     display: flex;
     width: 100%;
     justify-content: space-between;
+    align-items: center;
     color: #fff;
   }
   .palettes {
@@ -27,8 +37,15 @@ export const GalleryWrapper = styled.div`
   align-items: flex-start;
   justify-content: center;
   background-color: blue;
-  /* background-image: url('https://images.unsplash.com/photo-1475669698648-2f144fcaaeb1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80'); */
+  background-image: url('https://images.unsplash.com/photo-1475669698648-2f144fcaaeb1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80');
   background-size: cover;
   background-position: center;
   overflow: hidden;
+`;
+export const MyLink = styled(Link)`
+  color: #fff;
+  text-decoration: none;
+  a {
+    color: #fff;
+  }
 `;

@@ -10,6 +10,7 @@ export const MyLink = styled(Link)`
   height: 100%;
   width: 100%;
   text-decoration: none;
+
   display: flex;
   justify-content: center;
   align-items: center;

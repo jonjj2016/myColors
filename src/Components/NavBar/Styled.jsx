@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+
 export const NavBarWrapper = styled.header`
   display: flex;
   align-items: center;

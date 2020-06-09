@@ -42,7 +42,7 @@ const SinglePalette = ({ palette, color }) => {
           const { name, id, hex: background } = shade;
           return <ColourBox key={index} fromShades background={shade[state.format]} name={shade.name} id={shade.id} />;
         })}
-        <ColorBox show={true} fromShades={true}>
+        <ColorBox back={true} show={true} fromShades={true}>
           <GoBack>
             <button onClick={onRouteChange} className='copy-button'>
               Go Back
