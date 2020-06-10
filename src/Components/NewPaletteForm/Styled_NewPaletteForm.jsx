@@ -1,7 +1,15 @@
 import { makeStyles } from '@material-ui/core/styles';
+import styled from 'styled-components';
 
-const drawerWidth = 240;
-
+const drawerWidth = 500;
+export const ColorPickerWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+`;
 export const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
