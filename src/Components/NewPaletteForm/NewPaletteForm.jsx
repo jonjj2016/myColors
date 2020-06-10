@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import { Drawer, CssBaseline, AppBar, Toolbar, Typography, Divider, IconButton, Button } from '@material-ui/core';
 import { ChevronLeft, Menu } from '@material-ui/icons';
-import { useStyles, ColorPickerWrapper } from './Styled_NewPaletteForm';
+import { useStyles, ColorPickerWrapper, ColorBoxContainer } from './Styled_NewPaletteForm';
 import { ChromePicker } from 'react-color';
+import DragableColorBox from '../DragableColorBox/DragableColorBox';
 
 const NewPaletteForm = () => {
   const classes = useStyles();
@@ -78,15 +79,10 @@ const NewPaletteForm = () => {
           [classes.contentShift]: state.open,
         })}>
         <div className={classes.drawerHeader} />
-        <ul>
-          {state.colors.map((color, index) => {
-            return (
-              <li style={{ height: '100px', width: '100px', backgroundColor: color }} key={index}>
-                {color}
-              </li>
-            );
-          })}
-        </ul>
+
+        {state.colors.map((color, index) => (
+          <DragableColorBox color={color} key={index} />
+        ))}
       </main>
     </div>
   );

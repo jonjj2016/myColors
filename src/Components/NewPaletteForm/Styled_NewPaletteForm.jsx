@@ -51,11 +51,13 @@ export const useStyles = makeStyles((theme) => ({
   },
   content: {
     flexGrow: 1,
+    height: '94vh',
     padding: theme.spacing(3),
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
+
     marginLeft: -drawerWidth,
   },
   contentShift: {
@@ -66,3 +68,6 @@ export const useStyles = makeStyles((theme) => ({
     marginLeft: 0,
   },
 }));
+export const ColorBoxContainer = styled.div`
+  height: calc(100vh-64px);
+`;
