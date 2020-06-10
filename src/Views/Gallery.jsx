@@ -5,8 +5,6 @@ import { GalleryWrapper, MyLink } from './Styles/Styled_Gallery';
 const MainRoute = ({ palettes }) => {
   return (
     <GalleryWrapper>
-      {/* <div className='overlay'></div> */}
-      {/* <div className='main'> */}
       <div className='container'>
         <nav className='nav'>
           <h1>React Collors</h1>
@@ -18,7 +16,6 @@ const MainRoute = ({ palettes }) => {
           })}
         </div>
       </div>
-      {/* </div> */}
     </GalleryWrapper>
   );
 };
