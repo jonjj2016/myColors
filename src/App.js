@@ -24,7 +24,7 @@ function App() {
 
   return (
     <Switch>
-      <Route exact path='/palette/new' render={() => <NewPaletteForm saveNewPalette={saveNewPalette} />} />
+      <Route exact path='/palette/new' render={() => state.palettes.length && <NewPaletteForm palettes={state.palettes} saveNewPalette={saveNewPalette} />} />
       <Route path='/' exact render={() => <Gallery palettes={state.palettes} />} />
       <Route path='/palette/:id' exact render={() => state.palettes.length && <Palette palettes={state.palettes} />} />
       <Route path='/palette/:paletteId/:colorId' exact render={() => state.palettes.length && <PaletteShades palettes={state.palettes} />} />

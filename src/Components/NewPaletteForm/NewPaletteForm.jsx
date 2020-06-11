@@ -7,22 +7,25 @@ import { ChromePicker } from 'react-color';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import DragableColorBox from '../DragableColorBox/DragableColorBox';
 
-const NewPaletteForm = ({ saveNewPalette }) => {
+const NewPaletteForm = ({ saveNewPalette, palettes }) => {
+  console.log(palettes);
+
   const classes = useStyles();
   const [state, setState] = useState({
     color: 'red',
     open: false,
     colors: [{ name: 'blue', color: '#344' }],
-    colorName: '',
+    newColorName: '',
+    newPaletteName: '',
   });
 
   const handleDrawerOpen = () => {
     setState({ ...state, open: true });
   };
   const addNewColor = () => {
-    if (!state.colorName) return;
-    const newColor = { color: state.color, name: state.colorName };
-    setState({ ...state, colors: [...state.colors, newColor], colorName: '' });
+    if (!state.newColorName) return;
+    const newColor = { color: state.color, name: state.newColorName };
+    setState({ ...state, colors: [...state.colors, newColor], newColorName: '' });
   };
   const handleDrawerClose = () => {
     setState({ ...state, open: false });
@@ -31,18 +34,25 @@ const NewPaletteForm = ({ saveNewPalette }) => {
     setState({ ...state, color: color.hex });
   };
   const onChange = (e) => {
-    const { value } = e.target;
-    setState({ ...state, colorName: value });
+    const { value, name } = e.target;
+    setState({ ...state, [name]: value });
   };
   const savePalette = () => {
-    const paletteName = 'New Palette Name';
-    const palette = { paletteName, emoji: 'AM', id: paletteName.toLocaleLowerCase().replace(/ /g, '-'), colors: state.colors };
+    if (!state.newPaletteName) return;
+    const palette = { paletteName: state.newPaletteName, emoji: 'AM', id: state.newPaletteName.toLocaleLowerCase().replace(/ /g, '-'), colors: state.colors };
     saveNewPalette(palette);
   };
+
   useEffect(() => {
     ValidatorForm.addValidationRule('isColorNameUnique', (colorName) => state.colors.every(({ name }) => name.toLowerCase() !== colorName.toLowerCase()));
     ValidatorForm.addValidationRule('isColorUnique', (value) => state.colors.every(({ color }) => color !== state.color));
-  }, [addNewColor, state.color]);
+    ValidatorForm.addValidationRule('isPaletteNameUnique', (value) =>
+      palettes.every(({ paletteName }) => {
+        console.log(value.toLowerCase());
+        return paletteName.toLowerCase() !== state.newPaletteName.toLowerCase();
+      })
+    );
+  }, [addNewColor, state.color, state.newPaletteName]);
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -59,9 +69,12 @@ const NewPaletteForm = ({ saveNewPalette }) => {
           <Typography variant='h6' noWrap>
             Persistent drawer
           </Typography>
-          <Button variant='contained' color='primary' onClick={savePalette}>
-            Save Palette
-          </Button>
+          <ValidatorForm onSubmit={savePalette}>
+            <TextValidator validators={['required', 'isPaletteNameUnique']} errorMessages={['Palette Name is required', 'Palette name should  be uniquie']} name='newPaletteName' label='Palette Name' onChange={onChange} value={state.newPaletteName} />
+            <Button variant='contained' color='primary' type='submit'>
+              Save Palette
+            </Button>
+          </ValidatorForm>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -92,7 +105,7 @@ const NewPaletteForm = ({ saveNewPalette }) => {
           </div>
           <ChromePicker width={450} color={state.color} onChangeComplete={handleColorChange} />
           <ValidatorForm onSubmit={addNewColor}>
-            <TextValidator value={state.colorName} validators={['required', 'isColorNameUnique', 'isColorUnique']} errorMessages={['this field is required', 'Clor name should  be uniquie', 'Color should be Unique']} onChange={onChange} />
+            <TextValidator name='newColorName' value={state.newColorName} validators={['required', 'isColorNameUnique', 'isColorUnique']} errorMessages={['This field is required', 'Clor name should  be uniquie', 'Color should be Unique']} onChange={onChange} />
             <Button type='submit' variant='contained' color='primary' style={{ backgroundColor: state.color }}>
               Add Color
             </Button>

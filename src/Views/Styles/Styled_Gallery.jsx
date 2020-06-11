@@ -22,11 +22,12 @@ export const GalleryWrapper = styled.div`
     width: 100%;
     justify-content: space-between;
     align-items: center;
-    color: #fff;
+    color: #444;
   }
   .palettes {
     box-sizing: border-box;
     width: 100%;
+    height: 100%;
     display: grid;
     grid-template-columns: repeat(3, 30%);
     grid-gap: 5%;
@@ -43,7 +44,7 @@ export const GalleryWrapper = styled.div`
   overflow: hidden;
 `;
 export const MyLink = styled(Link)`
-  color: #fff;
+  color: #444;
   text-decoration: none;
   a {
     color: #fff;
