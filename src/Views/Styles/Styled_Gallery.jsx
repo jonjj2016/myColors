@@ -36,8 +36,8 @@ export const GalleryWrapper = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  background-color: blue;
-  background-image: url('https://images.unsplash.com/photo-1475669698648-2f144fcaaeb1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80');
+  background-color: #eee;
+  /* background-image: url('https://images.unsplash.com/photo-1475669698648-2f144fcaaeb1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80'); */
   background-size: cover;
   background-position: center;
   overflow: hidden;

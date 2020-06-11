@@ -41,8 +41,8 @@ export const paletteGenerator = (starterPallet) => {
     return newPalette;
 };
 
-export const findPalette = (id) => {
-    return seedColors.find((palette) => {
+export const findPalette = (palletes, id) => {
+    return palletes.find((palette) => {
         return palette.id === id;
     });
 };

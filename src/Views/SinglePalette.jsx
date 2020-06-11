@@ -3,10 +3,10 @@ import { useParams } from 'react-router-dom';
 import { findPalette, paletteGenerator } from '../helpers/ColorHelpers';
 import Palette from '../Components/Palette/Palette';
 
-const SinglePalette = () => {
+const SinglePalette = ({ palettes }) => {
   const params = useParams();
 
-  return <Palette palette={paletteGenerator(findPalette(params.id))} />;
+  return <Palette palette={paletteGenerator(findPalette(palettes, params.id))} />;
 };
 
 export default SinglePalette;

@@ -7,10 +7,10 @@ import { ChromePicker } from 'react-color';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import DragableColorBox from '../DragableColorBox/DragableColorBox';
 
-const NewPaletteForm = () => {
+const NewPaletteForm = ({ saveNewPalette }) => {
   const classes = useStyles();
   const [state, setState] = useState({
-    color: '',
+    color: 'red',
     open: false,
     colors: [{ name: 'blue', color: '#344' }],
     colorName: '',
@@ -34,6 +34,11 @@ const NewPaletteForm = () => {
     const { value } = e.target;
     setState({ ...state, colorName: value });
   };
+  const savePalette = () => {
+    const paletteName = 'New Palette Name';
+    const palette = { paletteName, emoji: 'AM', id: paletteName.toLocaleLowerCase().replace(/ /g, '-'), colors: state.colors };
+    saveNewPalette(palette);
+  };
   useEffect(() => {
     ValidatorForm.addValidationRule('isColorNameUnique', (colorName) => state.colors.every(({ name }) => name.toLowerCase() !== colorName.toLowerCase()));
     ValidatorForm.addValidationRule('isColorUnique', (value) => state.colors.every(({ color }) => color !== state.color));
@@ -43,6 +48,7 @@ const NewPaletteForm = () => {
       <CssBaseline />
       <AppBar
         position='fixed'
+        color='default'
         className={clsx(classes.appBar, {
           [classes.appBarShift]: state.open,
         })}>
@@ -53,6 +59,9 @@ const NewPaletteForm = () => {
           <Typography variant='h6' noWrap>
             Persistent drawer
           </Typography>
+          <Button variant='contained' color='primary' onClick={savePalette}>
+            Save Palette
+          </Button>
         </Toolbar>
       </AppBar>
       <Drawer

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export const MiniPaletteWrapper = styled(Link)`
-  background-color: #eee;
+  /* background-color: #eee; */
   border: 1px solid #000;
   border-radius: 5px;
   padding: 0.5rem;
@@ -14,7 +14,7 @@ export const MiniPaletteWrapper = styled(Link)`
     cursor: pointer;
   }
   .colors {
-    background-color: #444;
+    /* background-color: #444; */
     height: 150px;
     width: 100%;
     border-radius: 5px;
