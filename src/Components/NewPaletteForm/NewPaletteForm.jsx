@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import clsx from 'clsx';
-import { Drawer, CssBaseline, AppBar, Toolbar, Typography, Divider, IconButton, Button } from '@material-ui/core';
-import { ChevronLeft, Menu } from '@material-ui/icons';
-import { useStyles, ColorPickerWrapper } from './Styled_NewPaletteForm';
-import { ChromePicker } from 'react-color';
-import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+import {} from '@material-ui/core';
+import { useStyles } from './Styled_NewPaletteForm';
+import { ValidatorForm } from 'react-material-ui-form-validator';
 import DragableContainer from '../DragableColorList/DragableColorList';
-import arrayMove from 'array-move';
+import Nav from './NewPaletteNav/NewPaletteNav';
+import MyDrawer from './NewPaletteDrawer/NewPaletteDrawer';
+import ColorPicker from '../ColorPicker/ColorPicker';
 
 const NewPaletteForm = ({ saveNewPalette, palettes }) => {
   const classes = useStyles();
@@ -14,15 +14,27 @@ const NewPaletteForm = ({ saveNewPalette, palettes }) => {
   const [state, setState] = useState({
     color: 'red',
     open: false,
-    colors: [...palettes[0].colors],
+    colors: [],
     newColorName: '',
     newPaletteName: '',
     disabled: false,
+    maxItemInNewPalette: 13,
+    paletteModalOpen: false,
   });
+  //checking that user adds no more than 20 colors
+  useEffect(() => {
+    if (state.colors.length === 20) {
+      return setState({ ...state, disabled: true });
+    } else if (state.colors.length === 0) {
+      return setState({ ...state, disabled: false });
+    }
+  }, [state.colors]);
+
+  // setting colors to random color palette when component mounts
   useEffect(() => {
     const random = Math.floor(Math.random() * palettes.length);
     const shortColors = palettes[random].colors.filter((color, index) => {
-      if (index <= 17) {
+      if (index <= state.maxItemInNewPalette) {
         return color;
       }
     });
@@ -40,9 +52,9 @@ const NewPaletteForm = ({ saveNewPalette, palettes }) => {
     //checking for name existence
     if (!state.newColorName) return;
     //checking for colors length so no more then 20 colors can be added
-    if (state.colors.length >= 20) {
-      return setState({ ...state, disabled: true });
-    }
+    // if (state.colors.length === 19) {
+    //   return setState({ ...state, disabled: true });
+    // }
 
     const newColor = { color: state.color, name: state.newColorName };
     setState({ ...state, disabled: false, colors: [...state.colors, newColor], newColorName: '' });
@@ -51,9 +63,10 @@ const NewPaletteForm = ({ saveNewPalette, palettes }) => {
   const handleDrawerClose = () => {
     setState({ ...state, open: false });
   };
-
+  // toggling modal
+  const modalToggle = (bool) => setState({ ...state, paletteModalOpen: bool });
   const handleColorChange = (color) => {
-    setState({ ...state, color: color.hex });
+    setState({ ...state, color: color });
   };
 
   const onChange = (e) => {
@@ -68,14 +81,22 @@ const NewPaletteForm = ({ saveNewPalette, palettes }) => {
   };
 
   useEffect(() => {
-    ValidatorForm.addValidationRule('isColorNameUnique', (colorName) => state.colors.every(({ name }) => name.toLowerCase() !== colorName.toLowerCase()));
+    ValidatorForm.addValidationRule('isColorNameUnique', (colorName) =>
+      state.colors.every(({ name }) => {
+        if (state.newColorName) {
+          return name.toLowerCase() !== colorName.toLowerCase();
+        } else {
+          return false;
+        }
+      })
+    );
     ValidatorForm.addValidationRule('isColorUnique', (value) => state.colors.every(({ color }) => color !== state.color));
     ValidatorForm.addValidationRule('isPaletteNameUnique', (value) =>
       palettes.every(({ paletteName }) => {
         return paletteName.toLowerCase() !== state.newPaletteName.toLowerCase();
       })
     );
-  }, [addNewColor, state.color, state.newPaletteName]);
+  }, [addNewColor, state.color, state.newPaletteName, state.newColorName]);
 
   const onSortEnd = ({ oldIndex, newIndex }) => {
     console.log(oldIndex, newIndex);
@@ -95,76 +116,21 @@ const NewPaletteForm = ({ saveNewPalette, palettes }) => {
     const random = Math.floor(Math.random() * allColors.length);
     const color = allColors[random];
     setState({ ...state, color: color.color, newColorName: color.name });
-    addNewColor();
-    // setState({ ...state, colors });
-
-    //call add color function
   };
+
   return (
     <div className={classes.root}>
-      <CssBaseline />
-      <AppBar
-        position='fixed'
-        color='default'
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: state.open,
-        })}>
-        <Toolbar>
-          <IconButton color='inherit' aria-label='open drawer' onClick={handleDrawerOpen} edge='start' className={clsx(classes.menuButton, state.open && classes.hide)}>
-            <Menu />
-          </IconButton>
-          <Typography variant='h6' noWrap>
-            Persistent drawer
-          </Typography>
-          <ValidatorForm onSubmit={savePalette}>
-            <TextValidator validators={['required', 'isPaletteNameUnique']} errorMessages={['Palette Name is required', 'Palette name should  be uniquie']} name='newPaletteName' label='Palette Name' onChange={onChange} value={state.newPaletteName} />
-            <Button variant='contained' color='primary' type='submit'>
-              Save Palette
-            </Button>
-          </ValidatorForm>
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        className={classes.drawer}
-        variant='persistent'
-        anchor='left'
-        open={state.open}
-        classes={{
-          paper: classes.drawerPaper,
-        }}>
-        <div className={classes.drawerHeader}>
-          <IconButton onClick={handleDrawerClose}>
-            <ChevronLeft />{' '}
-          </IconButton>
-        </div>
-        <Divider />
-
-        <Divider />
-        <ColorPickerWrapper>
-          <h1>Design your palette</h1>
-          <div>
-            <Button variant='contained' onClick={onClearColors} color='secondary'>
-              Clear Palette
-            </Button>
-            <Button onClick={addRandomColor} variant='contained' color='primary'>
-              Random Color
-            </Button>
-          </div>
-          <ChromePicker width={450} color={state.color} onChangeComplete={handleColorChange} />
-          <ValidatorForm onSubmit={addNewColor}>
-            <TextValidator name='newColorName' value={state.newColorName} validators={['required', 'isColorNameUnique', 'isColorUnique']} errorMessages={['This field is required', 'Clor name should  be uniquie', 'Color should be Unique']} onChange={onChange} />
-            <Button disabled={state.disabled} type='submit' variant='contained' color='primary' style={{ backgroundColor: state.color }}>
-              Add Color
-            </Button>
-          </ValidatorForm>
-        </ColorPickerWrapper>
-      </Drawer>
+      <Nav modalToggle={modalToggle} classes={classes} onChange={onChange} state={state} savePalette={savePalette} handleDrawerOpen={handleDrawerOpen} />
+      {/* //children, classes, state, open, handleDrawerClose */}
+      <MyDrawer open={state.open} handleDrawerClose={handleDrawerClose}>
+        <ColorPicker onChange={onChange} addNewColor={addNewColor} handleColorChange={handleColorChange} state={state} onClearColors={onClearColors} addRandomColor={addRandomColor} />
+      </MyDrawer>
       <main
         className={clsx(classes.content, {
           [classes.contentShift]: state.open,
         })}>
         <div className={classes.drawerHeader} />
-        <DragableContainer onDelete={onDelete} onSortEnd={onSortEnd} colors={state.colors} axis='xy' />
+        {state.colors && <DragableContainer onDelete={onDelete} onSortEnd={onSortEnd} colors={state.colors} axis='xy' />}
       </main>
     </div>
   );
