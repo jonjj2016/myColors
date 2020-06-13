@@ -20,6 +20,7 @@ const NewPaletteForm = ({ saveNewPalette, palettes }) => {
     disabled: false,
     maxItemInNewPalette: 13,
     paletteModalOpen: false,
+    emoji: '',
   });
   //checking that user adds no more than 20 colors
   useEffect(() => {
@@ -49,13 +50,7 @@ const NewPaletteForm = ({ saveNewPalette, palettes }) => {
   };
 
   const addNewColor = () => {
-    //checking for name existence
     if (!state.newColorName) return;
-    //checking for colors length so no more then 20 colors can be added
-    // if (state.colors.length === 19) {
-    //   return setState({ ...state, disabled: true });
-    // }
-
     const newColor = { color: state.color, name: state.newColorName };
     setState({ ...state, disabled: false, colors: [...state.colors, newColor], newColorName: '' });
   };
@@ -74,9 +69,9 @@ const NewPaletteForm = ({ saveNewPalette, palettes }) => {
     setState({ ...state, [name]: value });
   };
 
-  const savePalette = () => {
+  const savePalette = (emoji) => {
     if (!state.newPaletteName) return;
-    const palette = { paletteName: state.newPaletteName, emoji: 'AM', id: state.newPaletteName.toLocaleLowerCase().replace(/ /g, '-'), colors: state.colors };
+    const palette = { paletteName: state.newPaletteName, emoji, id: state.newPaletteName.toLocaleLowerCase().replace(/ /g, '-'), colors: state.colors };
     saveNewPalette(palette);
   };
 
@@ -117,11 +112,9 @@ const NewPaletteForm = ({ saveNewPalette, palettes }) => {
     const color = allColors[random];
     setState({ ...state, color: color.color, newColorName: color.name });
   };
-
   return (
     <div className={classes.root}>
       <Nav modalToggle={modalToggle} classes={classes} onChange={onChange} state={state} savePalette={savePalette} handleDrawerOpen={handleDrawerOpen} />
-      {/* //children, classes, state, open, handleDrawerClose */}
       <MyDrawer open={state.open} handleDrawerClose={handleDrawerClose}>
         <ColorPicker onChange={onChange} addNewColor={addNewColor} handleColorChange={handleColorChange} state={state} onClearColors={onClearColors} addRandomColor={addRandomColor} />
       </MyDrawer>

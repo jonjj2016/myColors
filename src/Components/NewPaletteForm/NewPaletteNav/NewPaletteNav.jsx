@@ -24,7 +24,7 @@ const NewPaletteNav = ({ modalToggle, onChange, state, savePalette, handleDrawer
             Your Creative Palette
           </Typography>
         </Toolbar>
-        <Modal modalToggle={modalToggle} open={state.paletteModalOpen} savePalette={savePalette} onChange={onChange} value={state.newPaletteName} />
+        <Modal state={state} modalToggle={modalToggle} open={state.paletteModalOpen} savePalette={savePalette} onChange={onChange} value={state.newPaletteName} />
       </AppBar>
     </Wrapper>
   );

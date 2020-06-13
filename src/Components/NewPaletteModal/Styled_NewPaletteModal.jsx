@@ -5,7 +5,9 @@ export const Wrapper = styled.div`
   display: flex;
 `;
 export const Buttons = styled.div`
-  .form {
-    display: flex;
+  display: flex;
+  justify-content: space-between;
+  .button {
+    margin-left: 1rem;
   }
 `;
